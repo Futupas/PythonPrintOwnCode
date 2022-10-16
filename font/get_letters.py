@@ -1,30 +1,30 @@
 from PIL import Image
 
-real_pixel_size = 2 # then ALL data is in 'virtual pixels'
-letter_width = 5
-letter_height = 7
-letter_horizontal_margin = 2
-letter_vertical_margin = 2
-padding_left = 1
-padding_top = 1
-letters_image = 'font/letters.png'
+real_pixel_size = 4 # then ALL data is in 'virtual pixels'
+letter_width = 8
+letter_height = 8
+letter_horizontal_margin = 0
+letter_vertical_margin = 0
+padding_left = 0
+padding_top = 16
+letters_image = 'font/letters_2.png'
 
 letters_as_bitmap = {}
 
-#  !"#$%&'()*+,-./01
-# 23456789:;<=>?@ABC
-# DEFGHIJKLMNOPQRSTU
-# VWXYZ[\]^_`abcdefg
-# hijklmnopqrstuvwxy
-# z{|}~
+# !"#$%&'()*+,-./0
+# 123456789:;<=>?@
+# ABCDEFGHIJKLMNOP
+# QRSTUVWXYZ[\]^_ 
+# `abcdefghijklmno
+# pqrstuvwxyz{|}~
 
 letters_in_image = [
-    [ ' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1' ],
-    [ '2', '3', '4', '5', '6', '7', '8',  '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C' ],
-    [ 'D', 'E', 'F', 'G', 'H', 'I', 'J',  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U' ],
-    [ 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g' ],
-    [ 'h', 'i', 'j', 'k', 'l', 'm', 'n',  'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y' ],
-    [ 'z', '{', '|', '}', '~' ],
+    [ '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '0' ],
+    [ '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@' ],
+    [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P' ],
+    [ 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', ' ' ],
+    [ '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' ],
+    [ 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~' ],
 ]
 
 def print_letter_to_console(letter):
@@ -69,8 +69,8 @@ def get_letter(image, x, y):
 
 def convert_virtual_pixel_to_real(x, y):
     return {
-        'x': 2*x,
-        'y': 2*y,
+        'x': real_pixel_size * x,
+        'y': real_pixel_size * y,
     }
 
 
