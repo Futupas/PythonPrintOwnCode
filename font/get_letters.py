@@ -7,6 +7,7 @@ letter_horizontal_margin = 2
 letter_vertical_margin = 2
 padding_left = 1
 padding_top = 1
+letters_image = 'font/letters.png'
 
 letters_as_bitmap = {}
 
@@ -42,7 +43,7 @@ def print_letter_to_console(letter):
 
 
 def get_letters_as_bitmap():
-    image = Image.open('font/letters2.png').load()
+    image = Image.open(letters_image).load()
     for ir in range(len(letters_in_image)):
         for ic in range(len(letters_in_image[ir])):
             letter = letters_in_image[ir][ic]
@@ -91,7 +92,7 @@ def array_to_string(arr):
 
 def print_letters_to_py_file():
     get_letters_as_bitmap()
-    file = open('font/test_file.py', 'w')
+    file = open('font/test_printed_chars.py', 'w')
     file.write('letters = {\n')
     for i in letters_as_bitmap:
         letter = i
@@ -102,7 +103,7 @@ def print_letters_to_py_file():
         string = '\t\'' + letter + '\': ' + array_to_string(letter_bitmap) + ',\n'
         file.write(string)
     file.write('}\n\n')
-    file.write(open('font/print_letters.py', 'r').read())
+    file.write(open('font/_print_letters.py', 'r').read())
     file.close()
     print('File ready')
 
