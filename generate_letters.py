@@ -89,7 +89,7 @@ def array_to_string(arr):
 
 def print_letters_to_py_file():
     get_letters_as_bitmap()
-    file = open('letters.py', 'w')
+    file = open('letters.py', 'w', encoding='utf-8')
     file.write('letters = {\n')
     for i in letters_as_bitmap:
         letter = i
@@ -99,6 +99,7 @@ def print_letters_to_py_file():
 
         string = '\t\'' + letter + '\': ' + array_to_string(letter_bitmap) + ',\n'
         file.write(string)
+    file.write(open('additional_letters.txt', 'r', encoding='utf-8').read())
     file.write('}\n')
     file.close()
     print('File is ready')

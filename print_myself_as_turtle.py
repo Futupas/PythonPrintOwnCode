@@ -4,7 +4,7 @@ import os
 import turtle
 from letters import letters
 
-turtle.Screen().title('Self-writing turtle: loading')
+turtle.getscreen().title('Self-writing turtle: loading')
 
 REAL_PEN_SIZE = 20 # Found in google
 pixel_size = 4 # Then all measurements in 'virtual' pixels
@@ -17,8 +17,8 @@ char_1 = '#'
 char_0 = ' '
 padding_vertical = 3
 padding_horizontal = 3
-# turtle_speed = 10 # 1..10
-turtle_speed = 'fastest'
+turtle_speed = 0 # 0..10, 0 is fastest
+# turtle_speed = 'fastest'
 hide_turtle = False
 
 
@@ -73,7 +73,7 @@ def print_text(lines):
         for letter_row_i in range(letter_height):
             goto_line(line_i, letter_row_i)
             for c in line:
-                letter_bitmap = letters[c]
+                letter_bitmap = letters[c] if (c in letters) else letters['unknown']
                 letter_row = letter_bitmap[letter_row_i]
                 for px in letter_row:
                     if (px):

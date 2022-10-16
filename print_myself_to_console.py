@@ -15,7 +15,7 @@ def print_text(text):
         real_line = line.replace('\t', ' '*spaces_in_tab)
         for letter_row_i in range(letter_height):
             for c in real_line:
-                letter_bitmap = letters[c]
+                letter_bitmap = letters[c] if (c in letters) else letters['unknown']
                 letter_row = letter_bitmap[letter_row_i]
                 line_to_print = ''.join(map(lambda x : (char_1 if x else char_0), letter_row))
                 print(line_to_print, end=char_0*horizontal_margin)
