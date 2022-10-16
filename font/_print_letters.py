@@ -1,26 +1,31 @@
 # letters = {
-# 	' ': [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],
+# 	'a': [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],
 # 	'!': [[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0]],
 # }
 
-def print_letter_to_console(letter):
-    width = len(letter[0])
-    height = len(letter)
-    print('+' + '-'*width + '+')
-    for ir in range(height):
-        print('|', end='')
-        for ic in range(width):
-            if (letter[ir][ic]):
-                print('#', end='')
-            else:
-                print(' ', end='')
-        print('|')
-    print('+' + '-'*width + '+')
+spaces_in_tab = 4
+horizontal_margin = 0
+vertical_margin = 1
+letter_height = len(letters['a'])
+letter_width = len(letters['a'][0])
+char_1 = '#'
+char_0 = ' '
 
-for i in letters:
-    letter = letters[i]
-    print(i + ':')
-    print_letter_to_console(letter)
-    print()
+src_text = 'hello world\nfrom Futupas'
 
-print('ready')
+def print_text(text):
+    lines = text.split('\n')
+    for line in lines:
+        for letter_row_i in range(letter_height):
+            for c in line:
+                letter_bitmap = letters[c]
+                letter_row = letter_bitmap[letter_row_i]
+                line_to_print = ''.join(map(lambda x : (char_1 if x else char_0), letter_row))
+                print(line_to_print, end=char_0*horizontal_margin)
+            print()
+        print('\n'*vertical_margin, end='')
+                
+
+
+
+print_text(src_text)
