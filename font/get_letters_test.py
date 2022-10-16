@@ -19,6 +19,7 @@ letters_as_bitmap = {}
 
 letters_in_image = [
     [ ' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1' ],
+    [ '2', '3', '4', '5', '6', '7', '8',  '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C' ],
     [ 'D', 'E', 'F', 'G', 'H', 'I', 'J',  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U' ],
     [ 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g' ],
     [ 'h', 'i', 'j', 'k', 'l', 'm', 'n',  'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y' ],
@@ -78,11 +79,7 @@ def is_pixel_1(pixel):
 
 
 # get_letters_as_bitmap()
-# for i in letters_as_bitmap:
-#     letter = letters_as_bitmap[i]
-#     print(i + ':')
-#     print_letter_to_console(letter)
-#     print()
+
 
 def array_to_string(arr):
     arr_mapped = map(
@@ -105,6 +102,7 @@ def print_letters_to_py_file():
         string = '\t\'' + letter + '\': ' + array_to_string(letter_bitmap) + ',\n'
         file.write(string)
     file.write('}\n\n')
+    file.write(open('font/print_letters.py', 'r').read())
     file.close()
     print('File ready')
 
