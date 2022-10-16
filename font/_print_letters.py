@@ -16,8 +16,9 @@ src_text = 'hello world\nfrom Futupas'
 def print_text(text):
     lines = text.split('\n')
     for line in lines:
+        real_line = line.replace('\t', ' '*spaces_in_tab)
         for letter_row_i in range(letter_height):
-            for c in line:
+            for c in real_line:
                 letter_bitmap = letters[c]
                 letter_row = letter_bitmap[letter_row_i]
                 line_to_print = ''.join(map(lambda x : (char_1 if x else char_0), letter_row))

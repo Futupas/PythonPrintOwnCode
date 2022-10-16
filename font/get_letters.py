@@ -105,7 +105,7 @@ def print_letters_to_py_file():
     file.write('}\n\n')
     file.write(open('font/_print_letters.py', 'r').read())
     file.close()
-    print('File ready')
+    print('File is ready')
 
 
 print_letters_to_py_file()
