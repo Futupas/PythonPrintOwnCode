@@ -10,10 +10,19 @@ padding_top = 1
 
 letters_as_bitmap = {}
 
+#  !"#$%&'()*+,-./01
+# 23456789:;<=>?@ABC
+# DEFGHIJKLMNOPQRSTU
+# VWXYZ[\]^_`abcdefg
+# hijklmnopqrstuvwxy
+# z{|}~
+
 letters_in_image = [
-    # [ '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' ]
-    [ ' ', '!', '"', '#', '$', '%' ],
-    [ '2', '3', '4', '5', '6', '7' ],
+    [ ' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1' ],
+    [ 'D', 'E', 'F', 'G', 'H', 'I', 'J',  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U' ],
+    [ 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g' ],
+    [ 'h', 'i', 'j', 'k', 'l', 'm', 'n',  'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y' ],
+    [ 'z', '{', '|', '}', '~' ],
 ]
 
 def print_letter_to_console(letter):
@@ -68,11 +77,36 @@ def is_pixel_1(pixel):
     return pixel[0] > 128 and pixel[1] > 128 and pixel[2] > 128
 
 
-get_letters_as_bitmap()
-for i in letters_as_bitmap:
-    letter = letters_as_bitmap[i]
-    print(i + ':')
-    print_letter_to_console(letter)
-    print()
+# get_letters_as_bitmap()
+# for i in letters_as_bitmap:
+#     letter = letters_as_bitmap[i]
+#     print(i + ':')
+#     print_letter_to_console(letter)
+#     print()
 
-print('hello world')
+def array_to_string(arr):
+    arr_mapped = map(
+        (lambda x: array_to_string(x) if hasattr(x, '__len__') else ('1' if x else '0')), 
+        arr
+    )
+    return '[' + ','.join(arr_mapped) + ']'
+
+
+def print_letters_to_py_file():
+    get_letters_as_bitmap()
+    file = open('font/test_file.py', 'w')
+    file.write('letters = {\n')
+    for i in letters_as_bitmap:
+        letter = i
+        if (letter == '\'' or letter == '\\'):
+            letter = '\\' + letter
+        letter_bitmap = letters_as_bitmap[i]
+
+        string = '\t\'' + letter + '\': ' + array_to_string(letter_bitmap) + ',\n'
+        file.write(string)
+    file.write('}\n\n')
+    file.close()
+    print('File ready')
+
+
+print_letters_to_py_file()
