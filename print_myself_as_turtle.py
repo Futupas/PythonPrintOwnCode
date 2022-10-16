@@ -1,4 +1,4 @@
-# Made by Futupas
+# Made with ♡ by Futupas
 
 import os
 import turtle
@@ -101,9 +101,19 @@ letters = {
 	'|': [[0,0,0,0,1,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0]],
 	'}': [[0,0,1,1,1,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,1,1,0,0],[0,0,0,0,1,1,0,0],[0,0,0,0,1,0,0,0],[0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]],
 	'~': [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,1,1,0,0,1,0],[0,1,0,0,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]],
+	'♡': [
+        [0,1,0,0,0,1,0,0],
+        [1,0,1,0,1,0,1,0],
+        [1,0,0,1,0,0,1,0],
+        [1,0,0,0,0,0,1,0],
+        [0,1,0,0,0,1,0,0],
+        [0,0,1,0,1,0,0,0],
+        [0,0,0,1,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+    ],
 }
 
-pixel_size = 4 # Then all measurements in 'virtual' pixels
+pixel_size = 3 # Then all measurements in 'virtual' pixels
 spaces_in_tab = 4
 margin_horizontal = 0
 margin_vertical = 1
@@ -115,11 +125,13 @@ padding_vertical = 1
 padding_horizontal = 1
 # turtle_speed = 10 # 1..10
 turtle_speed = 'fastest'
+hide_turtle = False
 
 
 
 file_path = os.path.abspath(__file__)
-file = open(file_path, 'r')
+file = open('.gitignore', 'r', encoding='utf-8')
+# file = open(file_path, 'r', encoding='utf-8')
 file_contents = file.read().replace('\r', '')
 lines = file_contents.split('\n')
 
@@ -127,16 +139,18 @@ text_height = len(lines)
 text_width = max(map(lambda x : len(x), lines))
 
 # Yes, (margin_vertical-1) is more correct, but I do't wanna check last margin in loop, so it's a kind of kostyl
-screen_width = (2 * padding_horizontal + text_width * (letter_width + margin_horizontal))
-screen_height = (2 * padding_vertical + text_height * (letter_height + margin_vertical))
+screen_width = 2 * padding_horizontal + text_width * (letter_width + margin_horizontal)
+screen_height = 2 * padding_vertical + text_height * (letter_height + margin_vertical)
 
-turtle.Screen().screensize(
+turtle.getscreen().screensize(
     pixel_size * screen_width, 
     pixel_size * screen_height
 )
-turtle.Turtle().pencolor(0, 0, 0)
-turtle.Turtle().fillcolor(0, 0, 0)
+turtle.pencolor(0, 0, 0)
+turtle.fillcolor(0, 0, 0)
 turtle.speed(turtle_speed)
+if hide_turtle:
+    turtle.hideturtle()
 ts = turtle.getscreen().getcanvas()
 ts.xview_moveto(pixel_size * screen_width / -2)
 ts.yview_moveto(pixel_size * screen_height / -2)
@@ -159,7 +173,8 @@ def goto_line(line_index, pseudo_index_inside_line):
     real_x = real_x - screen_width*pixel_size/2
     real_y = screen_height*pixel_size/2 - real_y
 
-    turtle.setpos(real_x, real_y)
+    # turtle.setpos(real_x, real_y)
+    turtle.setposition(real_x, real_y)
 
 
 def print_text(lines):
@@ -177,8 +192,10 @@ def print_text(lines):
                 turtle.forward(pixel_size * margin_horizontal)
 
 
-turtle.Screen().title('Self-writing turtle')
+turtle.getscreen().title('Self-writing turtle: writing')
 
 print_text(lines)
+
+turtle.getscreen().title('Self-writing turtle')
 
 turtle.done()
