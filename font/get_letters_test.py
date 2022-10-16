@@ -1,29 +1,15 @@
 from PIL import Image
 
 real_pixel_size = 2 # then ALL data is in 'virtual pixels'
-real_pixel_size = 2
 letter_width = 5
 letter_height = 7
-letter_vertical_margin = 2
 letter_horizontal_margin = 2
+letter_vertical_margin = 2
 padding_left = 1
 padding_top = 1
 
-letter_test = [
-    [ 0, 0, 0, 1, 0 ],
-    [ 0, 0, 0, 1, 0 ],
-    [ 0, 1, 1, 1, 0 ],
-    [ 0, 0, 0, 1, 0 ],
-    [ 0, 0, 0, 1, 0 ],
-    [ 0, 0, 0, 1, 0 ],
-    [ 0, 0, 0, 1, 0 ],
-    [ 1, 1, 1, 1, 1 ],
-]
-
 letters_as_bitmap = {}
 
-#  !"#$%
-# 234567
 letters_in_image = [
     # [ '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' ]
     [ ' ', '!', '"', '#', '$', '%' ],
@@ -44,12 +30,16 @@ def print_letter_to_console(letter):
         print('|')
     print('+' + '-'*width + '+')
 
-print_letter_to_console(letter_test)
 
+def get_letters_as_bitmap():
+    image = Image.open('font/letters2.png').load()
+    for ir in range(len(letters_in_image)):
+        for ic in range(len(letters_in_image[ir])):
+            letter = letters_in_image[ir][ic]
+            x = padding_left + (letter_horizontal_margin + letter_width)*ic
+            y = padding_top + (letter_vertical_margin + letter_height)*ir
+            letters_as_bitmap[letter] = get_letter(image, x, y)
 
-def letters_as_bitmap():
-    image = Image.open('letters2.png').load()
-    
 
 # x and y are virtual pixels
 def get_letter(image, x, y):
@@ -72,18 +62,17 @@ def convert_virtual_pixel_to_real(x, y):
         'y': 2*y,
     }
 
+
 def is_pixel_1(pixel):
     # in our image, white are the ones
     return pixel[0] > 128 and pixel[1] > 128 and pixel[2] > 128
 
 
-a = get_letter(Image.open('font/letters2.png').load(), 8, 1)
-print_letter_to_console(a)
+get_letters_as_bitmap()
+for i in letters_as_bitmap:
+    letter = letters_as_bitmap[i]
+    print(i + ':')
+    print_letter_to_console(letter)
+    print()
 
-# im = Image.open('letters2.png')
-# pix = im.load()
-# pix[0, 0].
-# print (im.size)  # Get the width and hight of the image for iterating over
-# print (pix[x,y])  # Get the RGBA Value of the a pixel of an image
-# pix[x,y] = (0, 0, 0)  # Set the RGBA Value of the image (tuple)
-# im.save('alive_parrot.png')  # Save the modified pixels as .png
+print('hello world')
